@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ 'Sad blog ⌘ ' + title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+
+<header>
+    <!-- main menu -->
+    <a href="{{ url_for('homepage') }}">Homepage</a> | <a href="">Create New</a> | <a href="{{ url_for('logout') }}">Log out</a>
+    <p>Hello, <a href="{{ '/profile/' + g.user.nickname }}">{{ g.user.nickname }}</a></p>
+    <hr>
+    <!-- logout button -->
+</header>
+
+{% block content %} {% endblock %}
+
+</body>

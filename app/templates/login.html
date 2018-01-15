@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <style>
+        form {
+        max-width: 330px;
+        }
+
+    </style>
+
+</head>
+<body>
+<p style="text-align: right;">Don't have account? <a href="/signup">- Sign Up!</a></p>
+<br>
+<div class="container" align="center">
+    <form method="POST" action="/login" class="form-signin">
+        {{ form.hidden_tag() }}
+        <input type="email" name="email" placeholder="Email" class="form-control">
+        <input type="password" name="password" placeholder="Password" class="form-control">
+        <input type="checkbox">{{ form.remember_me }} Remember Me</input>
+        <input type="submit" name="submit" value="Sign In" class="btn btn-lg btn-primary btn-block">
+    </form>
+</div>
+</body>
+</html>

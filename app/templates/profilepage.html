@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<p>{{ user.nickname }} profile</p>
+
+<div>
+{% for com_post in comment_post %}
+
+<p> {{ com_post.comment.body }} in {{ com_post.post[0].name }} </p>
+<hr>
+
+{% endfor %}
+</div>
+
+{% endblock %}

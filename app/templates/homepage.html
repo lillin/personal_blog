@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for post in posts %}
+<h3>
+    <a href="{{ '/' + post.id|string }}">{{ post.name }}</a>
+</h3>
+<p>
+    {{ post.body }}
+</p>
+<strong><a href="{{ '/' + post.id|string }}#CommentForm">Leave a comment...</a></strong>
+<hr>
+{% endfor %}
+
+{% endblock %}

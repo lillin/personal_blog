@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>
+    {{ post.name }}
+</h1>
+<p>
+    {{ post.body }}
+</p>
+<hr>
+<div class="comment">
+    <a name="CommentForm"></a>
+    <form method="POST" action="/{{ post.id }}" name="CommentForm" style="max-width: 150px;">
+        {{ form.hidden_tag() }}
+        <p><textarea rows="3" cols="60" placeholder="Write your comment..." name="body"></textarea></p>
+        <input type="submit" name="send" placeholder="Send" class="btn btn-lg btn-primary btn-block">
+    </form>
+</div>
+<br>
+<div class="comments-list">
+    <p><strong>Comments:</strong></p>
+</div>
+<hr>
+{% for user_comment in user_comments %}
+<p><a href="{{ '/profile/' + user_comment.user.nickname|string }}">{{ user_comment.user.nickname }}</a>
+    <i>{% if user_comment.user.nickname == g.user.nickname %}(you){% endif %}</i>
+    said: {% if user_comment.user.nickname == g.user.nickname %}<a href="{{ '/delete_comment/' + user_comment.comment.id|string }}" style="float: right;">delete</a>{% endif %}</p>
+
+<p>{{ user_comment.comment.body }}</p>
+<hr>
+{% endfor %}
+
+{% endblock %}

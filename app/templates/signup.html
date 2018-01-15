@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+</head>
+<body>
+<!-- Add default header -->
+<p style="text-align: right;">Have account? <a href="/login">- Sign In!</a></p>
+<br>
+<div class="container" align="center">
+    <form method="POST" action="/signup" class="form-signin" style="max-width: 330px;">
+        {{ form.hidden_tag() }}
+        <input type="email" name="email" placeholder="Email" class="form-control">
+        {% for error in form.email.errors %}
+        <div class="alert alert-secondary" role="alert">[{{ error }}]</div>
+        {% endfor %}
+        <input type="password" name="password" placeholder="Password" class="form-control">
+        {% for error in form.password.errors %}
+        <div class="alert alert-secondary" role="alert">[{{ error }}]</div>
+        {% endfor %}
+        <input type="password" name="confirm" placeholder="Password" class="form-control">
+        <br>
+        <input type="submit" name="submit" value="Sign up" class="btn btn-lg btn-primary btn-block">
+    </form>
+</div>
+<!-- Add message "Have account? Login ->" Where login is a link to login page -->
+</body>
+</html>
