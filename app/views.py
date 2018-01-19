@@ -1,6 +1,7 @@
 from flask import render_template, redirect, request, url_for, g, send_from_directory, flash, session, escape
 from flask_login import current_user, login_required, login_user, logout_user
 import os
+from datetime import datetime
 from app import app, db, login_manager
 from .forms import LoginForm, SignupForm, CommentForm
 from .models import User, Post, Comment
@@ -41,10 +42,7 @@ def login():
             next = request.args.get('next')
 
             redirect_to_index = redirect(next or url_for('homepage'))
-            response = app.make_response(redirect_to_index)
-            response.set_cookie('user_id', user.id.to_bytes(10, byteorder='big'))
-            print(response)
-            return response
+            return redirect_to_index
     return render_template('login.html', title=title, form=form)
 
 
@@ -96,7 +94,7 @@ def postpage(post_id):
 
     if request.method == 'POST' and form.validate_on_submit() and form.validate():
 
-        comment = Comment(form.body.data, g.user.id, post_id)
+        comment = Comment(form.body.data, datetime.utcnow(), g.user.id, post_id)
 
         db.session.add(comment)
         db.session.commit()

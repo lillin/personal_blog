@@ -42,11 +42,13 @@ class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), index=True)
     body = db.Column(db.String(10000), index=True)
+    timestamp = db.Column(db.DateTime)
     comments = db.relationship('Comment', lazy='dynamic')
 
-    def __init__(self, name, body):
+    def __init__(self, name, body, timestamp):
         self.name = name
         self.body = body
+        self.timestamp = timestamp
 
     def get_id(self):
         # return a unique id for the user in unicode format
@@ -63,10 +65,12 @@ class Post(db.Model):
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(10000), index=True)
+    timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     post_id = db.Column(db.Integer, db.ForeignKey('post.id'))
 
-    def __init__(self, body, user_id, post_id):
+    def __init__(self, body, timestamp, user_id, post_id):
         self.body = body
+        self.timestamp = timestamp
         self.user_id = user_id
         self.post_id = post_id
